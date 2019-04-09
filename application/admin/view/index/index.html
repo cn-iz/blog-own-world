@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <script src="/static/vue-2.6.10/vue.js"></script>
+    <style>
+        body{
+            display: flex;
+        }
+        .left{
+            flex: 1;
+            background: #fff;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+            min-height: 100vh;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .right{
+            flex: 6;
+            min-height: 100vh;
+        }
+       .left-bar{
+           height: 38px;
+           border-left: 5px solid green;
+           background: #F2F2F2;
+           display: flex;
+           align-items: center;
+           padding-left: 10px;
+       }
+        .left-bar-item{
+            height: 38px;
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            cursor: pointer;
+        }
+        .left-bar-item:hover{
+            color: #666666;
+        }
+        iframe{
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="left" >
+        <div style="height: 20vh;">
+            <h1 style="font-family: YAC1IT935F8;">小世界</h1>
+        </div>
+       <div class="left-bar">folder管理</div>
+        <div class="left-bar-item" onclick="setif('folder/fdlist')">folder列表</div>
+        <div class="left-bar-item" onclick="setif('folder/addfd')">新建folder</div>
+       <div class="left-bar">Hello World管理</div>
+        <div class="left-bar-item" onclick="setif('index/infolist?hw_class=1')">Hello World列表</div>
+        <div class="left-bar-item" onclick="setif('index/addinfo?hw_class=1')">Hello World添加</div>
+        <div class="left-bar">详解管理</div>
+        <div class="left-bar-item" onclick="setif('index/infolist?hw_class=2')">详解d列表</div>
+        <div class="left-bar-item" onclick="setif('index/addinfo?hw_class=2')">详解添加</div>
+        <div class="left-bar">博客管理</div>
+        <div class="left-bar-item" onclick="setif('index/infolist?hw_class=3')">博客d列表</div>
+        <div class="left-bar-item" onclick="setif('index/addinfo?hw_class=3')">博客添加</div>
+    </div>
+    <iframe id="if" src="/admin/folder/fdlist" class="right">
+
+    </iframe>
+    <script>
+        var setif=function (f) {
+            document.getElementById('if').src='/admin/'+f
+        }
+    </script>
+</body>
+</html>

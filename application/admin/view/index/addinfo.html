@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <script src="/static/vue-2.6.10/vue.js"></script>
+    <script src="/static/main/js/jquary.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<form id="f" action="/admin/index/upload" method="post" style="display: none;" enctype="multipart/form-data">
+    <input id="videos" type="file" name="video" class="file">
+</form>
+<form id="form" method="post" class="layui-tab">
+    <input type="hidden" name="hw_class" value="{$class}" >
+    <input id="video" type="hidden" name="hw_video" value="" >
+    <ul class="layui-tab-title">
+        <li class="layui-this ">基本信息</li>
+        {if condition="$class==1 or $class==2"}
+        <li>上传视频</li>
+        {/if}
+        <li >文本信息</li>
+        <li onclick="submit()"> 提交</li>
+    </ul>
+    <div class="layui-tab-content layui-form" >
+        <div class="layui-tab-item layui-show">
+            <div style="padding: 5vh;"></div>
+            <div style="width: 60%;padding: 5vw;border: #EEEEEE solid 1px;margin-left: calc(20% - 5vw);">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="hw_title" required    placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">folder</label>
+                    <div class="layui-input-block">
+                        <select name="fd_id" lay-verify="required">
+                            {volist name="fds" id="vo"}
+                            <option value="{$vo.fd_id}">{$vo.fd_name}</option>
+                           {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">关键字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="hw_keys" required   placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">简介</label>
+                    <div class="layui-input-block">
+                        <textarea name="hw_introduction"   placeholder="请输入简介"  class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">代码</label>
+                    <div class="layui-input-block">
+                        <textarea name="hw_code"   placeholder="请输入" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {if condition="$class==1 or $class==2"}
+        <div class="layui-tab-item">
+            <div style="height: 50px;"></div>
+            <div class="layui-btn" style="margin-left: 50px;" onclick="$('#videos').click()"> <span class="layui-icon">&#xe67c;</span>上传文件</div>
+            <div style="height: 50px;"></div>
+            <div class="layui-progress"  lay-showpercent="true" lay-filter="demo">
+                <div class="layui-progress-bar" lay-percent="0%"></div>
+            </div>
+        </div>
+        {/if}
+        <div class="layui-tab-item ">
+            <!-- 加载编辑器的容器 -->
+            <script type="text/javascript">
+                window.UEDITOR_HOME_URL = "/static/ueditor/";
+            </script>
+            <script id="container" name="hw_text" type="text/plain"></script>
+            <!-- 配置文件 -->
+            <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+            <!-- 编辑器源码文件 -->
+            <script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var ue = new UE.ui.Editor({ initialFrameHeight:window.screen.availHeight*.66});
+                ue.render("container");
+            </script>
+        </div>
+        <div class="layui-tab-item">
+            <div style="padding: 5vh;"></div>
+            <h2 style="padding-left: 15vw;">正在提交</h2>
+        </div>
+    </div>
+</form>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('form', function(){
+        var form = layui.form;
+
+    });
+    var submit=function () {
+        {if condition="$class==1 or $class==2"}
+        if($('#video').val()==''){
+            layer.msg('视频还在上传<br>请稍后再试', {
+                time: 2000, //2s后自动关闭
+            });
+            return
+        }
+        {/if}
+        $('#form').submit()
+    }
+    var element=null
+    layui.use('element', function(){
+        var $ = layui.jquery
+        element = layui.element;
+    });
+    $(function () {
+        $(".file").change(function(){
+            var form = new FormData(document.getElementById("f"));
+            $.ajax({
+                url: '/admin/index/upload' ,
+                type: 'POST',
+                Accept:'text/html;charset=UTF-8',
+                cache: false,
+                contentType:"multipart/form-data",
+                data: form,
+                processData: false,
+                contentType: false,
+                xhr:function(){
+                    myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // check if upload property exists
+                        myXhr.upload.addEventListener('progress',function(e){
+                            var loaded = e.loaded;//已经上传大小情况
+                            var tot = e.total;//附件总大小
+                            var per = Math.floor(100*loaded/tot);  //已经上传的百分比
+                            element.progress('demo', per+'%');
+                            console.log('附件总大小 = ' + loaded);
+                            console.log('已经上传大小 = ' + tot);
+                        }, false); // for handling the progress of the upload
+                    }
+                    return myXhr;
+                },success:function(data){
+                    $('#video').val(data)
+                    layer.msg('视频上传成功！', {
+                        time: 2000, //2s后自动关闭
+                    });
+                },error:function(){
+                    layer.msg('视频上传失败', {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

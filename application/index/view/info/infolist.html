@@ -1,0 +1,75 @@
+{extend name="base" /}
+
+{block name="head"}
+<style>
+    .ac{
+        background: #f2f2f2;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<div class="main-div-flex" id="app">
+    <div  class="left" style="padding-left: 20px;padding-top: 22px;padding-right: 8px;background: #fff;">
+        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" style="margin-bottom: 20px;">
+        <div v-for="item in fds" :class="item.fd_id==ac?'left-branch ac':'left-branch'" v-on:click="acfd(item.fd_id)">{{item.fd_name}}</div>
+        <script>
+            //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function(){
+                var element = layui.element;
+            });
+        </script>
+    </div>
+    <div class="right" style="background: #fff;margin-left: 30px;">
+        <a v-for="item in info" :href="'/index/info/info/hw_id/'+item.hw_id+'.html'" >
+            <div class="list-item">
+                <h3 class="list-item-title">{{item.hw_title}}</h3>
+                <div class="list-item-info">{{item.hw_introduction}}</div>
+                <div class="list-item-bottom">
+                    <span style="padding-right: 20px;">{{item.create_time}}</span>查看：{{item.hw_look}}
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    var ac = window.location.href.split('#'); //获取url中"#"符后的字串
+    if(ac.length>1){
+        ac=ac[1]
+    }else {
+        ac=null
+    }
+    var app = new Vue({
+        el: '#app',
+        data: {
+            info: [],
+            fds:{$fds},
+            ac:null
+        },
+        mounted:function(){
+            if(this.fds.length>0&&!ac){
+                this.acfd(this.fds[0].fd_id)
+            }else{
+                this.acfd(ac)
+            }
+
+        },
+        methods:{
+            acfd(id) {
+                this.ac=id
+                var _this=this
+                axios.post('/index/info/getfdinfo', {
+                    fd_id: id,
+                })
+                .then(function (response) {
+                    _this.info=response.data
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                window.location.href=window.location.href.split('#')[0]+'#'+id
+            }
+        }
+    })
+</script>
+{/block}

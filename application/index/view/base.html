@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=72000" />
+    <meta http-equiv="Pragma" CONTENT="cache">
+    <meta http-equiv="Expires" content="{$t}">
+    <mate name="author" content="iz"></mate>
+    <mate name="keywords" content="{$info.hw_keys?$info.hw_keys:''}"></mate>
+    <mate name="description" content="{$info.hw_keys?$info.hw_introduction:''}"></mate>
+    <title>{$info.hw_title?$info.hw_title:'小世界'}</title>
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <script src="/static/vue-2.6.10/vue.js"></script>
+    <script src="/static/vue-2.6.10/axios.js"></script>
+    <style>
+        .layui-nav .layui-nav-item a{
+            color: #333333;
+            font-weight: bold;
+            font-size: 19px;
+            /*font-size: large;*/
+        }
+        .layui-nav .layui-nav-item a:hover{
+            color: #000;
+        }
+        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after{
+            background: #666666;
+            height: 2px;
+        }
+        .layui-nav{
+            position: fixed;
+            width: 100%;
+            z-index: 9999;
+        }
+        .main{
+            display: flex;
+            justify-content: center;
+        }
+        .bottom-info{
+            text-align: center;
+            padding: 20px;
+        }
+        body{
+            background: #F2F2F2;
+        }
+        .left-branch{
+            border-left: #ccc solid 5px;
+            padding: 10px 12px;
+            background: #fff;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .left-branch:hover{
+            background: #F6F6F6;
+        }
+        .branch > i{
+            right: 5px;
+            left: auto;
+        }
+        .list-item{
+            padding: 8px 15px;
+            border-radius: 2px;
+            border-bottom: 1px #F2F2F2 solid;
+            cursor: pointer;
+            position:relative;
+        }
+        .list-item:hover{
+            background: #F8F8F8;
+        }
+        .list-item-title{
+            font-weight: bold;
+            padding-bottom: 6px;
+        }
+        .list-item-info{
+            font-size: 15px;
+            padding-bottom: 1px;
+            color: #666666;
+        }
+        .list-item-bottom{
+            font-size: smaller;
+            text-align: right;
+            color: #666666;
+        }
+        .main-div-flex{
+            display: flex;
+            width: calc(70vw + 20px);
+            padding-top: 30px;
+            min-height: 80vh;
+        }
+        .main-div{
+            margin-top: 30px;
+            width: 70vw;
+            background: #fff;
+            padding: 10px;
+            min-height: 80vh;
+        }
+        .left{
+            flex: 1;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+        }
+        .right{
+            flex: 5;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+        }
+        a:hover{
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+{block name="head"}{/block}
+<ul class="layui-nav " style="background: #fff; box-shadow:#aaa 1px 1px 1px; margin-bottom: 2px;" >
+<!--        <li class="layui-nav-item {:request()->controller()=='Index' ? 'layui-this':''}"><a href="/index/index/index">首页</a></li>-->
+    <li class="layui-nav-item {$ac=='1' ? 'layui-this':''}">
+        <a href="{:url('index/info/infolist','hw_class=1')}">hello world</a>
+    </li>
+    <li class="layui-nav-item {$ac=='2' ? 'layui-this':''}"><a href="{:url('index/info/infolist','hw_class=2')}">详解</a></li>
+    <li class="layui-nav-item {$ac=='3' ? 'layui-this':''}"><a href="{:url('index/info/infolist','hw_class=3')}">博客</a></li>
+    <li class="layui-nav-item {$ac=='About' ? 'layui-this':''}"><a href="/index/about/about">关于 </a></li>
+    <li class="layui-nav-item" style="right: 20px;float: right;"><img src="/static/imgs/ico/ico.png" alt="" style="height: 35px;"></li>
+</ul>
+<div style="height: 60px"></div>
+<div class="main">
+    {block name="main"}{/block}
+</div>
+<div class="bottom-info">愿每天都被梦想叫醒 <br>@2019 小世界  by Iz </div>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+    window.onload=function () {
+        console.log('人间，我总想念过去；')
+        console.log('编程，我只认对错；')
+    }
+</script>
+</body>
+</html>

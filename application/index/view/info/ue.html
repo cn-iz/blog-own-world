@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="/static/ueditor/ueditor.parse.js"></script>
+    <style>
+        img,image{
+            max-width: 100%;
+        }
+        #main{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="main">
+    <div id="info"></div>
+</div>
+
+</body>
+<script>
+    window.onload = function(){
+        var body=document.getElementById('body')
+        document.getElementById('info').innerHTML=window.parent.document.getElementById('ue').innerHTML
+        var bHeight = body.scrollHeight;
+        var dHeight = window.document.documentElement.scrollHeight;
+        var height = Math.max(bHeight, dHeight);
+        window.parent.document.getElementById('if').height = height;
+    }
+    uParse('#info', {
+        rootPath: '/static/ueditor/'
+    })
+</script>
+</html>

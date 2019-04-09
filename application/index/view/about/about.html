@@ -1,0 +1,135 @@
+{extend name="base" /}
+
+{block name="head"}
+<mate name="author" content="iz"></mate>
+<mate name="keywords" content="iz 作者履历和个人介绍"></mate>
+<style>
+    .main-div{
+        width: 60vw;
+        background: #f2f2f2;
+        padding: 10px;
+    }
+    .item{
+        background: #fff;
+        margin-top: 30px;
+        padding: 20px;
+        box-shadow: #aaa 1px 1px 1px;
+        border-radius: 3px;
+    }
+    .title{
+        text-align: center;
+        font-weight: bold;
+        padding: 5px;
+    }
+    .info{
+        color: #666666;
+    }
+    .info>p{
+        text-indent: 25px;
+        line-height: 30px;
+    }
+    table{
+        width: 70%;
+        line-height: 25px;
+    }
+    .zx{
+        /*display: flex;*/
+    }
+    .zx>a>img{
+        width: 17%;
+        height: auto;
+        margin: 10px 8%;
+    }
+    .my{
+        padding: 5px 3vw;
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<div class="main-div">
+    <div class="item">
+        <h3 class="title">为什么做这个网站</h3>
+        <div class="info" style="padding: 10px 3vw;">
+            <p>
+                大一时候我是班里编程能力一般般的学生，有一天一个学设计的朋友来我家玩。聊到自学她给我介绍了一款app叫慕课网，从此我漫长的自学之旅就开始了，最开始学习前端三剑客（html5、css3、js）
+                学得差不多的时发现静态页面无法满足需求，需要学一门后端语言，于是学习后端语言（当时选择了nodejs陷入了无限得回调），再后来为了开发快自学了php(thinkphp)……</p>
+            <p>
+                在后来大概两年时间里,我几乎把慕课网、腾讯课堂、网易云课堂里IT类感兴趣的课程都看了一遍。在看的同时跟着练习、再自己定小项目利用所学完成。常常熬夜写到电脑没电，三年下来写了数十万行的代码。现在养成了一个
+                习惯——见到IT相关的技术比如区块链、vue、人工只能等就上网查查，觉得有趣就学习。当然现在很少看视频了，学多了就会发现虽然平台、语言不同但是最终思路都是相近的，这时候官方文档加csdn等博客
+                就成了另一种学习方式。
+            </p>
+<!--           <p>-->
+<!--               有朋友说 “你是我见过在编程方面最有天赋的人”，我当时没有选择回答。我心里的答案是“如果你有和我一样的经历，或许你比我天赋更好”。 送给有心人！-->
+<!--           </p>-->
+            <p>
+                为什么写这个网站？在大学期间除了老师，学习的资源更多来自互联网，而且很少有收费的。毕业之际，希望将来能把所学的东西回馈给互联网，所以写了这个博客提醒将来的自己
+                “无论多忙，勿忘学习，勿忘回报”。我不奢求所有看过我作品的人有所收获，只希望有人能有所收获。
+            </p>
+        </div>
+    </div>
+    <div class="item">
+        <h3 class="title">个人技能</h3>
+        <div class="info">
+            <div style="display: flex;justify-content: center;">
+            <table>
+               <tr>
+                   <td>php</td>
+                   <td>thinkphp</td>
+               </tr>
+                <tr>
+                    <td>python</td>
+                    <td>爬虫、selenium(web测试、爬虫)、 flask、 uiautomator2(安卓自动化测试) </td>
+                </tr>
+                <tr>
+                    <td>微信开发</td>
+                    <td>微信小程序</td>
+                </tr>
+                <tr>
+                    <td>c#</td>
+                    <td>wpf桌面开发</td>
+                </tr>
+                <tr>
+                    <td>web前端</td>
+                    <td>vue、jqery、bootstrap、layui、easyui、js、css、html</td>
+                </tr>
+                <tr>
+                    <td>javascript</td>
+                    <td>nodejs、cocos-creator</td>
+                </tr>
+                <tr>
+                    <td>机器学习</td>
+                    <td>keras、tensorflow</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h3 class="title">名言收集</h3>
+        <div class="info">
+            <div class="my">
+                智者务其实，愚者争虚名 <span>司马懿</span>
+            </div>
+            <div class="my">
+                挥剑只用一天，魔剑20年 <span>司马懿</span>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <h3 class="title">自学推荐</h3>
+        <div class="zx">
+            <a href="https://study.163.com/" target="_blank"><img src="/static/imgs/ico/1.png" alt=""></a>
+            <a href="https://ke.qq.com/" target="_blank"> <img src="/static/imgs/ico/2.jpg" alt=""></a>
+            <a href="https://www.imooc.com/" target="_blank"><img src="/static/imgs/ico/3.png" alt=""></a>
+        </div>
+        <div style="display: flex;justify-content: center;">
+            <table>
+                <tr><td><a href="https://morvanzhou.github.io" target="_blank">莫烦python</a></td><td>python 基础、目前比较流行的机器学习框架和技术视频详解</td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+{/block}

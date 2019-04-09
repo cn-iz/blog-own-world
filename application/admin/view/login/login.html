@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <title>Title</title>
+    <style>
+        #yzm>img{
+            height: 50px;
+            margin-left: 3vw;
+        }
+    </style>
+</head>
+<body style="display: flex;justify-content: center;">
+<div style="width: 50%;margin-top: 15vh;">
+    <form class="layui-form" action="" method="post" >
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="user_name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="height: 5vh;"></div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="user_pwd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div style="height: 5vh;"></div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">验证码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="yzm" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline" id="yzm"><img src="/admin/login/captcha" alt="captcha" id="verify_img" onclick="refreshVerify()"/></div>
+            <script>
+                function refreshVerify() {
+                    var ts = Date.parse(new Date())/1000;
+                    var img = document.getElementById('verify_img');
+                    img.src = "/admin/login/captcha?id="+ts;
+                }
+            </script>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" >立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        //Demo
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

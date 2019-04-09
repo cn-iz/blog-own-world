@@ -1,0 +1,39 @@
+{extend name="base" /}
+
+{block name="main"}
+<div class="main-div layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+        <li class="layui-this">教程</li>
+        {if condition="$info.hw_class==1 or $info.hw_class==2"}
+        <li>视频</li>
+        {/if}
+        <li>代码</li>
+    </ul>
+    <div class="layui-tab-content" id="app">
+        <div class="layui-tab-item layui-show">
+            <div id="ue" style="display: none;">{$info.hw_text}</div>
+            <iframe id="if" src="/index/info/ue" style="width: 100%;" frameborder="0" scrolling="no"></iframe>
+        </div>
+        {if condition="$info.hw_class==1 or $info.hw_class==2"}
+        <div class="layui-tab-item">
+            <video src="{$info.hw_video}" style="width: 90%;margin-left: 5%;margin-top: 30px;" controls="controls"></video>
+        </div>
+        {/if}
+        <div class="layui-tab-item">{$info.hw_code}</div>
+    </div>
+</div>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+    var app=new  Vue({
+        data:{
+            el: '#app',
+            info:[]
+        }
+    })
+</script>
+{/block}

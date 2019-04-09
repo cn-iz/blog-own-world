@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">hello world</li>
+        <li>详解</li>
+        <li>博客</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>标题</th>
+                    <th>类别</th>
+                    <th>create_time</th>
+                    <th>update_time</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="info1" id="vo"}
+                <tr>
+                    <td>{$vo.fd_id}</td>
+                    <td>{$vo.fd_name}</td>
+                    <td>{$vo.fd_class}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>{$vo.update_time}</td>
+                    <td  style="padding-bottom: 5px;padding-top: 5px;width: 110px;">
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/edit?fd_id={$vo.fd_id}">编辑</a>
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/del?fd_id={$vo.fd_id}">删除</a>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>标题</th>
+                    <th>类别</th>
+                    <th>create_time</th>
+                    <th>update_time</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="info2" id="vo"}
+                <tr>
+                    <td>{$vo.fd_id}</td>
+                    <td>{$vo.fd_name}</td>
+                    <td>{$vo.fd_class}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>{$vo.update_time}</td>
+                    <td  style="padding-bottom: 5px;padding-top: 5px;width: 110px;">
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/edit?fd_id={$vo.fd_id}">编辑</a>
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/del?fd_id={$vo.fd_id}">删除</a>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>标题</th>
+                    <th>类别</th>
+                    <th>create_time</th>
+                    <th>update_time</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="info3" id="vo"}
+                <tr>
+                    <td>{$vo.fd_id}</td>
+                    <td>{$vo.fd_name}</td>
+                    <td>{$vo.fd_class}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>{$vo.update_time}</td>
+                    <td  style="padding-bottom: 5px;padding-top: 5px;width: 110px;">
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/edit?fd_id={$vo.fd_id}">编辑</a>
+                        <a class="layui-btn layui-btn-sm" href="/admin/folder/del?fd_id={$vo.fd_id}">删除</a>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+</body>
+</html>

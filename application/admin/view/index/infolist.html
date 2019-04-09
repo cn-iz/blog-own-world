@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/layui-v2.4.5/layui/css/layui.css"  media="all">
+    <script src="/static/layui-v2.4.5/layui/layui.js"></script>
+    <style>
+        .cz{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body style="padding: 3vw;">
+<table class="layui-table">
+<!--    <colgroup>-->
+
+<!--    </colgroup>-->
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>标题</th>
+        <th>关键词</th>
+        <th>类别</th>
+        <th>create_time</th>
+        <th>update_time</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="info" id="vo"}
+    <tr>
+        <td>{$vo.hw_id}</td>
+        <td>{$vo.hw_title}</td>
+        <td>{$vo.hw_keys}</td>
+        <td>{$vo.hw_class}</td>
+        <td>{$vo.create_time}</td>
+        <td>{$vo.update_time}</td>
+        <td  style="padding-bottom: 5px;padding-top: 5px;width: 110px;">
+            <a class="layui-btn layui-btn-sm" href="/admin/index/edit?hw_id={$vo.hw_id}">编辑</a>
+            <a class="layui-btn layui-btn-sm" href="/admin/index/del?hw_id={$vo.hw_id}&hw_class={$vo.hw_class}">删除</a>
+        </td>
+    </tr>
+    {/volist}
+
+    </tbody>
+</table>
+</body>
+</html>
